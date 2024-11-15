@@ -3,8 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test-html-git</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Full-Page Iframe with No Scrollbars</title>
+  <style>
+    /* Reset margin and padding to ensure full-page layout */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;  /* Remove body and html scrollbars */
+    }
+
+    /* Full-screen iframe */
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;  /* Remove iframe border */
+      display: block;
+      transform: scale(1);  /* Scale content to fit */
+      transform-origin: 0 0;  /* Ensure scaling starts from the top-left corner */
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
   <!-- Full-page iframe embedding the URL with no scrolling -->
