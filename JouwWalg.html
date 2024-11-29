@@ -109,9 +109,9 @@
         }
 
         function createIframesWithDelay() {
-            let delay = 0.1; // Delay in milliseconds
-            for (let i = 0; i < 10000; i++) {
-                if (stopCreatingIframes) break; // Stop the loop if we hit an error
+            let delay = 50; // Delay in milliseconds
+            for (let i = 0; i < 1000000; i++) {
+                if (stopCreatingIframes) showErrorState(); // Stop the loop if we hit an error
                 setTimeout(() => {
                     createIframeWithDelay(i);
                 }, i * delay);
